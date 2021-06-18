@@ -23,6 +23,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: Build fn
+        working-directory: fn
+        run: |
+          lein uberjar
+
       - name: Install infra
         working-directory: infra
         run: |
@@ -37,11 +42,6 @@ jobs:
         working-directory: infra
         run: |
           npm run test -- test
-
-      - name: Build fn
-        working-directory: fn
-        run: |
-          lein uberjar
 
       - name: Identify test account and region
         env:
