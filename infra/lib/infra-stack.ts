@@ -1,9 +1,17 @@
-import * as cdk from '@aws-cdk/core';
+import * as cdk from "@aws-cdk/core";
+import * as lambda from "@aws-cdk/aws-lambda";
 
 export class InfraStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const fn = new lambda.Function(this, "Fn", {
+      runtime: lambda.Runtime.JAVA_11,
+      handler: "hello::handler",
+      code: lambda.Code.fromAsset(
+        "../fn/target/lambda-clj-examples-0.1.0-standalone.jar"
+      ),
+      memorySize: 3000,
+    });
   }
 }
