@@ -11,7 +11,7 @@ test("Empty Stack", () => {
   // WHEN
   const stack = new Infra.InfraStack(app, "MyTestStack");
   // THEN
-  expectCDK(stack).to(
+  expectCDK(stack).notTo(
     matchTemplate(
       {
         Resources: {},
